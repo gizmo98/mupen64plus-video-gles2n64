@@ -409,15 +409,15 @@ bool OGL_CoreVideo_Start()
 	config.framebuffer.height = g_fb_height;
 	current_w = g_fb_width;
 	current_h = g_fb_height;
-    }		
+    }
 #endif
-	
-	/* Set the video mode */
+
+    /* Set the video mode */
     LOG(LOG_MINIMAL, "Setting video mode %dx%d...\n", current_w, current_h );
     if (CoreVideo_SetVideoMode(current_w, current_h, 32, M64VIDEO_FULLSCREEN, flags) != M64ERR_SUCCESS)
     {
-	printf("ERROR: Failed to set %i-bit video mode: %ix%i\n", 32, config.window.width, config.window.height);
-	return false;
+        printf("ERROR: Failed to set %i-bit video mode: %ix%i\n", 32, config.window.width, config.window.height);
+        return false;
     }
 
     const unsigned char* m_pRenderStr = glGetString(GL_RENDERER);
@@ -426,7 +426,7 @@ bool OGL_CoreVideo_Start()
     
     sprintf(m_strDeviceStats, "%.60s - %.128s : %.60s", m_pVendorStr, m_pRenderStr, m_pVersionStr);
     printf("Video: Using OpenGL: %s\n", m_strDeviceStats); //TODO should use core DebugMessage();
-	
+
     //// paulscode, fixes the screen-size problem
     const float dstRatio = (float)current_h / (float)current_w;
     const float srcRatio = ( config.romPAL ? 9.0f/11.0f : 0.75f );
@@ -483,10 +483,10 @@ bool OGL_Start()
 #ifdef USE_SDL
     if (!OGL_SDL_Start())
         return false;
+#else
+    if (!OGL_CoreVideo_Start())
+        return false;
 #endif
-//
-	
-	OGL_CoreVideo_Start();
     OGL_InitStates();
 
 #ifdef USE_SDL
