@@ -266,8 +266,11 @@ void OGL_InitStates()
 
 void OGL_UpdateScale()
 {
-    OGL.scaleX = (float)config.framebuffer.width / (float)VI.width;
-    OGL.scaleY = (float)config.framebuffer.height / (float)VI.height;
+    if (VI.width != 0 && VI.height != 0)
+    {
+        OGL.scaleX = (float)config.framebuffer.width / (float)VI.width;
+        OGL.scaleY = (float)config.framebuffer.height / (float)VI.height;
+    }
 }
 
 void OGL_ResizeWindow(int x, int y, int width, int height)
