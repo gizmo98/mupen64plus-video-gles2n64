@@ -183,7 +183,7 @@ inline void QWordInterleave( void *mem, u32 numDWords )
 
 inline u16 swapword( u16 value )
 {
-#ifdef ARM_ASM
+#ifdef __arm__
     asm("rev16 %0, %0" : "+r"(value)::);
     return value;
 #else
