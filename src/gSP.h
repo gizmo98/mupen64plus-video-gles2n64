@@ -53,36 +53,24 @@
 #endif
 
 #define gSPFlushTriangles() \
-if \
-( \
-    ( \
-         (config.tribufferOpt) && \
-         (OGL.triangles.num > 1000) || \
-         ( \
-             (RSP.nextCmd != G_NOOP) && \
-             (RSP.nextCmd != G_RDPNOOP) && \
-             (RSP.nextCmd != G_MOVEMEM) && \
-             (RSP.nextCmd != G_ENDDL) && \
-             (RSP.nextCmd != G_DL) && \
-             (RSP.nextCmd != G_VTXCOLORBASE) && \
-             (RSP.nextCmd != G_TRI1) && \
-             (RSP.nextCmd != G_TRI2) && \
-             (RSP.nextCmd != G_TRI4) && \
-             (RSP.nextCmd != G_QUAD) && \
-             (RSP.nextCmd != G_VTX) && \
-             (RSP.nextCmd != G_MTX) \
-         ) \
-    ) || \
+    if \
+    ( \ 
+    (gSP.geometryMode & G_SHADING_SMOOTH) == 0 \
+    ) \
+    { \
+        OGL_DrawTriangles(); \
+        return; \
+    }
+    if \
     ( \
         (RSP.nextCmd != G_TRI1) && \
         (RSP.nextCmd != G_TRI2) && \
         (RSP.nextCmd != G_TRI4) && \
         (RSP.nextCmd != G_QUAD) \
     ) \
-) \
-{ \
-    OGL_DrawTriangles(); \
-}
+    { \
+        OGL_DrawTriangles(); \
+    }
 
 
 #define CLIP_X      0x03
