@@ -154,11 +154,6 @@ EXPORT int CALL InitiateGFX (GFX_INFO Gfx_Info)
 
     CheckInterrupts = Gfx_Info.CheckInterrupts;
 
-    Config_LoadConfig();
-    Config_LoadRomConfig(Gfx_Info.HEADER);
-
-    OGL_Start();
-
     return 1;
 }
 
@@ -234,6 +229,12 @@ EXPORT int CALL RomOpen (void)
     frameSkipper.setTargetFPS(config.romPAL ? 50 : 60);
     frameSkipper.setSkips(config.autoFrameSkip,
         config.frameRenderRate);
+
+    Config_LoadConfig();
+    Config_LoadRomConfig(Gfx_Info.HEADER);
+
+    OGL_Start();
+
     return 1;
 }
 
