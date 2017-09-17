@@ -100,8 +100,6 @@ extern const volatile unsigned char One2Eight[2] =
     255, // 1 = 11111111
 };
 
-extern "C" {
-
 inline void UnswapCopy( void *src, void *dest, u32 numBytes )
 {
 	if (numBytes == 1) {
@@ -317,7 +315,5 @@ inline u32 I4_RGBA8888( u8 color )
     u8 c = Four2Eight[color];
     c |= c << 4;
     return (c << 24) | (c << 16) | (c << 8) | c;
-}
-
 }
 

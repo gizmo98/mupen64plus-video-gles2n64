@@ -11,9 +11,13 @@ extern const volatile unsigned char Two2Eight[4];
 extern const volatile unsigned char One2Four[2];
 extern const volatile unsigned char One2Eight[2];
 
+
+extern "C" {
+
 void UnswapCopy( void *src, void *dest, u32 numBytes );
 void DWordInterleave( void *mem, u32 numDWords );
 void QWordInterleave( void *mem, u32 numDWords );
+
 u16 swapword( u16 value );
 
 u16 RGBA8888_RGBA4444( u32 color );
@@ -35,5 +39,7 @@ u16 I4_IA88( u8 color );
 u16 I8_IA88( u8 color );
 u16 IA88_IA88( u16 color );
 u32 I4_RGBA8888( u8 color );
+
+}
 
 #endif // CONVERT_H
